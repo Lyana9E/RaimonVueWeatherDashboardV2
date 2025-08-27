@@ -1,6 +1,5 @@
 <template>
   <div class="w-full max-w-xl mx-auto">
-    <!-- Input جستجو: از Ant Design Vue -->
     <a-input-search
         v-model:value="query"
         :placeholder="placeholder"
@@ -29,3 +28,4 @@ const onSearch = () => {
   emit('search', query.value)
 }
 </script>
+
