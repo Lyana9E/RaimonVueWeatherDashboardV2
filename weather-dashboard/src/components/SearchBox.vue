@@ -1,6 +1,6 @@
 <template>
   <div class="w-full max-w-xl mx-auto">
-    <a-input-search
+    <aInputSearch
         v-model:value="query"
         :placeholder="placeholder"
         enter-button="Search"
