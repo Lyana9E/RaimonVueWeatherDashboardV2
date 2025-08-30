@@ -20,25 +20,31 @@
           :isFavorite="currentWeather?.location?.name ? weatherStore.favorites.includes(currentWeather.location.name) : false"
           @toggle-favorite="toggleFavorite"
       />
+      <Forecast v-if="forecastWeather" :forecast="forecastWeather" />
+
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
+
 import AppHeader from '../components/layouts/AppHeader.vue'
 import SearchBox from '../components/SearchBox.vue'
 import WeatherCard from '../components/WeatherCard.vue'
+import Forecast from "@/components/Forecast.vue"
 import { useWeatherApi } from '../composables/useWeatherApi'
 import { useWeatherStore } from '../stores/weatherStore'
 
 
-const { currentWeather, loading, error, getCurrentWeather } = useWeatherApi()
+
+const { currentWeather, forecastWeather, loading, error, getCurrentWeather, getForecastWeather } = useWeatherApi()
 
 const weatherStore = useWeatherStore()
 
 const handleSearch = (q: string) => {
   if (q.trim()) {
     getCurrentWeather(q.trim())
+    getForecastWeather(q.trim(), 3)
   }
 }
 
