@@ -12,7 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,watch } from 'vue'
+import { useDebounce } from '@vueuse/core'
+
 
 const props = defineProps<{
   placeholder?: string
@@ -24,6 +26,13 @@ const emit = defineEmits<{
 
 const query = ref('')
 
+const debouncedQuery = useDebounce(query,700);
+
+watch(debouncedQuery,(newVal)=>{
+  if(newVal.trim()){
+    emit('search', newVal)
+  }
+})
 const onSearch = () => {
   emit('search', query.value)
 }
