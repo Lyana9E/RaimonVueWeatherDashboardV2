@@ -19,6 +19,14 @@
           :isFavorite="currentWeather?.location?.name ? weatherStore.favorites.includes(currentWeather.location.name) : false"
           @toggle-favorite="toggleFavorite"
       />
+
+      <div v-if="currentWeather" class="mt-4 text-center">
+        <p class="text-gray-600">
+          last update: <span class="font-bold">{{ lastUpdatedDateTime }}</span>
+        </p>
+      </div>
+
+
       <Forecast v-if="forecastWeather" :forecast="forecastWeather" />
 
     </main>
@@ -26,12 +34,14 @@
 </template>
 
 <script setup lang="ts">
-
+import { computed } from 'vue'
+import { useTimeAgo } from '@vueuse/core'
 import SearchBox from '../components/SearchBox.vue'
 import WeatherCard from '../components/WeatherCard.vue'
 import Forecast from "../components/Forecast.vue"
 import { useWeatherApi } from '../composables/useWeatherApi'
 import { useWeatherStore } from '../stores/weatherStore'
+
 
 
 
@@ -45,6 +55,23 @@ const handleSearch = (q: string) => {
     getForecastWeather(q.trim(), 3)
   }
 }
+
+
+const lastUpdatedDateTime = computed(() => {
+  if (currentWeather.value?.current?.last_updated_epoch) {
+    const timestamp = currentWeather.value.current.last_updated_epoch * 1000
+    const date = new Date(timestamp)
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }).format(date)
+  }
+  return ''
+})
 
 const toggleFavorite = (cityName: string | null) => {
   if (!cityName) return
