@@ -24,6 +24,7 @@
     "@vue/tsconfig": "^0.7.0",
     "axios": "^1.11.0",
     "jsdom": "^26.1.0",
+    "less": "^4.4.1",
     "typescript": "~5.8.3",
     "vite": "^7.1.2",
     "vitest": "^3.2.4",

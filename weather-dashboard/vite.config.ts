@@ -1,45 +1,68 @@
+// import { fileURLToPath, URL } from 'url'
 // import { defineConfig } from 'vite'
 // import vue from '@vitejs/plugin-vue'
 // import tailwindcss from '@tailwindcss/vite'
+// import { configDefaults } from 'vitest/config'
 //
-// // https://vite.dev/config/
 // export default defineConfig({
-//   plugins: [
-//       vue(),
-//     tailwindcss(),
-//   ],
+//     plugins: [
+//         vue(),
+//         tailwindcss(),
+//     ],
+//     resolve: {
+//         alias: {
+//             '@': fileURLToPath(new URL('./src', import.meta.url))
+//         }
+//     },
+//     test: {
+//         environment: 'jsdom',
+//         globals: true,
+//         exclude: [...configDefaults.exclude, 'e2e/*'],
+//         root: fileURLToPath(new URL('./', import.meta.url)),
+//     }
 // })
 
 
-
-import { fileURLToPath, URL } from 'url'
+// vite.config.ts
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import { configDefaults } from 'vitest/config'
 
-// این فایل پیکربندی برای Vite و Vitest است.
-// این پیکربندی Vitest را به استفاده از محیط JSDOM مجبور می‌کند که
-// برای تست کامپوننت‌های Vue.js ضروری است.
 export default defineConfig({
     plugins: [
         vue(),
         tailwindcss(),
     ],
+    css: {
+        preprocessorOptions: {
+            less: {
+                modifyVars: {
+                    'primary-color': '#0077b6',
+                    'link-color': '#03045e',
+                    'success-color': '#a7c957',
+                    'warning-color': '#f4a261',
+                    'error-color': '#c1121f',
+                    'heading-color': 'rgba(0, 0, 0, 0.85)', // رنگ عناوین
+                    'text-color': 'rgba(0, 0, 0, 0.65)', // رنگ متن
+                    'text-color-secondary': 'rgba(0, 0, 0, 0.45)', // رنگ متن ثانویه
+                    'border-color-base': '#d9d9d9', // رنگ مرزها
+                    'box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)', // سایه باکس
+                },
+                javascriptEnabled: true,
+            },
+        },
+    },
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
-    // اضافه کردن پیکربندی Vitest
     test: {
-        // استفاده از JSDOM برای شبیه‌سازی محیط مرورگر
         environment: 'jsdom',
-        // فعال کردن APIهای سراسری مانند `describe`, `it`, `expect`
         globals: true,
-        // الگوهای فایل‌هایی که باید از تست خارج شوند
         exclude: [...configDefaults.exclude, 'e2e/*'],
-        // مسیر ریشه برای اجرای تست‌ها
         root: fileURLToPath(new URL('./', import.meta.url)),
     }
 })
