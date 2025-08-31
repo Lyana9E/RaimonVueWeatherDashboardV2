@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { ref } from 'vue'
 import SearchBox from './SearchBox.vue'
-import { useDebounce } from '@vueuse/core'
 
 // یک ref برای mock کردن مقدار debounced ایجاد می‌کنیم.
 const mockDebouncedQuery = ref('')

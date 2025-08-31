@@ -35,7 +35,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useTimeAgo } from '@vueuse/core'
 import SearchBox from '../components/SearchBox.vue'
 import WeatherCard from '../components/WeatherCard.vue'
 import Forecast from "../components/Forecast.vue"
