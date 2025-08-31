@@ -1,6 +1,5 @@
 <template>
   <div class="mx-auto max-w-5xl">
-    <AppHeader />
 
     <main class="px-4 py-8 space-y-8">
       <SearchBox
@@ -28,10 +27,9 @@
 
 <script setup lang="ts">
 
-import AppHeader from '../components/layouts/AppHeader.vue'
 import SearchBox from '../components/SearchBox.vue'
 import WeatherCard from '../components/WeatherCard.vue'
-import Forecast from "@/components/Forecast.vue"
+import Forecast from "../components/Forecast.vue"
 import { useWeatherApi } from '../composables/useWeatherApi'
 import { useWeatherStore } from '../stores/weatherStore'
 
